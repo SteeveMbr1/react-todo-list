@@ -1,7 +1,7 @@
 import Task from "./Task";
 
 
-function TodoList ({todos, toggleIsDone, deleteTask}) {
+function TodoList ({todos, toggleIsDone, deleteTask, onEdit}) {
 
     return (
         <ul className="list">
@@ -10,9 +10,10 @@ function TodoList ({todos, toggleIsDone, deleteTask}) {
           return (
             <Task
                 key={task.id}
-                {...task}
+                task = { task }
                 toggleIsDone={toggleIsDone}
                 deleteTask={deleteTask}
+                onEdit={onEdit}
             />
           )
         })}

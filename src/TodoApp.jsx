@@ -9,12 +9,12 @@ function TodoApp() {
     const list = localStorage.getItem("TodoListApp")
     return list ? JSON.parse(list) : []
   })
-  
+
   useEffect(() => {
     localStorage.setItem("TodoListApp", JSON.stringify(todos))
   }, [todos])
-  
-  
+
+
   function addNewTask(title) {
     if (title !== "")
     setTodos(current => {
@@ -28,12 +28,13 @@ function TodoApp() {
       ]
     })
   }
-  
+
+
   function toggleIsDone(id, isDone) {
     setTodos(current => {
       const list = current.map(task => {
         if (task.id === id)
-        return {...task, isDone}
+          return {...task, isDone}
         return task
       })
       return list.sort((a, b) => {
@@ -45,18 +46,27 @@ function TodoApp() {
       })
     })
   }
-  
+
   function deleteTask(id) {
     setTodos(current => {
       return current.filter(task => task.id !== id)
     })
+  }
+
+  function editTask(id, title) {
+    setTodos(current => current.map(task => {
+      if (task.id === id) {
+        return {...task, title}
+      }
+      return task
+    }))
   }
   
   return (
     <>
       <TaskForm onSubmit={addNewTask}/>
         <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleIsDone={toggleIsDone} deleteTask={deleteTask} />
+      <TodoList todos={todos} toggleIsDone={toggleIsDone} deleteTask={deleteTask} onEdit={editTask}/>
     </>
     )
   }
