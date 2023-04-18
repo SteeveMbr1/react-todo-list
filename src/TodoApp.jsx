@@ -24,6 +24,7 @@ function TodoApp() {
           id : crypto.randomUUID(),
           title : title,
           isDone : false,
+          isEdit : false
         }
       ]
     })
@@ -54,6 +55,8 @@ function TodoApp() {
   }
 
   function editTask(id, title) {
+    if (id === null)
+      return addNewTask(title)
     setTodos(current => current.map(task => {
       if (task.id === id) {
         return {...task, title}
@@ -64,9 +67,9 @@ function TodoApp() {
   
   return (
     <>
-      <TaskForm onSubmit={addNewTask}/>
         <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleIsDone={toggleIsDone} deleteTask={deleteTask} onEdit={editTask}/>
+        <TaskForm onSubmit={addNewTask}/>
+        <TodoList todos={todos} toggleIsDone={toggleIsDone} onDelete={deleteTask} onEdit={editTask}/>
     </>
     )
   }

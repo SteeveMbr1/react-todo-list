@@ -12,16 +12,15 @@ function TaskForm ({ onSubmit }) {
     }
 
     return (
-        <form className='new-item-form' onSubmit={onSubmitForm}>
+        <form className='new-task-form' onSubmit={onSubmitForm}>
         <div className="form-row">
-          <label htmlFor="item">New Item</label>
-            <input
+          <input
               type="text"
               id="item"
               value={task}
               onChange={e => setTask(e.target.value)}
-            />
-            <button className="btn">Add</button>
+              placeholder="Add a task"
+          />
         </div>
       </form>
     )
